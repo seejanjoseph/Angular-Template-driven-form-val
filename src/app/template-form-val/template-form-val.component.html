@@ -1,0 +1,18 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)" novalidate>
+  <label>Name</label>
+  <input type="text" name="fullName" [(ngModel)]="user.fullName" myName required minlength="5" #fullName="ngModel">
+  <div *ngIf="fullName.errors  && (fullName.dirty || fullName.touched )">
+    Not Valid
+  </div>
+  <br><br>
+
+  <label>Email</label>
+  <input type="email" name="email" [(ngModel)]="user.email" pattern="[^ @]*@[^ @]*" required #email="ngModel">
+  <div *ngIf="email.errors && (email.dirty || email.touched)">Please fill the vaild Email</div>
+
+  <br><br>
+  <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+</form>
+<pre>{{f.value | json}}</pre>
+<div>------ Two way Data Binding ------</div>
+{{user.fullName}}<br> {{user.email}}
